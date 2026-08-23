@@ -1,12 +1,11 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import dutyRouter from './routes/duty.router.ts'
+import { env } from '../env.ts';
 
-dotenv.config();
+const port = env.port;
+const base_url = env.baseUrl;
 
-const port = process.env.BACKEND_PORT;
-const base_url = process.env.BASE_API_URL;
 const server = express();
 
 server.use(express.json());
