@@ -1,17 +1,25 @@
-import type { IDutyService } from "../interfaces/duty.interface";
+import type { IDutyRepository, IDutyService } from "../interfaces/duty.interface";
 import type { Duty } from "../types/duty.types";
 
 export class DutyService implements IDutyService {
+    private readonly dutyRepository: IDutyRepository;
+
+    constructor(dutyRepository: IDutyRepository) { this.dutyRepository = dutyRepository }
+
     getDuties(): Promise<Duty[]> {
-        throw new Error("Method not implemented.");
+        return this.dutyRepository.getDuties();
     }
     addDuty(data: any): Promise<Duty> {
-        throw new Error("Method not implemented.");
+        return this.dutyRepository.addDuty(data);
     }
     updateDuty(id: string, data: any): Promise<Duty> {
-        throw new Error("Method not implemented.");
+        if (!id) throw new Error("Method not implemented.");
+
+        return this.dutyRepository.updateDuty(data);
     }
     deleteDuty(id: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+        if (!id) throw new Error("Method not implemented.");
+
+        return this.dutyRepository.deleteDuty(id);
     }
 }
