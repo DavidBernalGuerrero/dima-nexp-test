@@ -2,7 +2,7 @@ import "dotenv/config";
 
 export const env = {
   port: Number(process.env.BACKEND_PORT),
-  baseUrl: Number(process.env.BASE_API_URL),
+  baseUrl: process.env.BASE_API_URL,
 
   database: {
     host: process.env.DB_HOST,
