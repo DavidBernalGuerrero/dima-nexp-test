@@ -18,13 +18,16 @@ export class DutyController {
 
     addDuty = async(_req: Request, res: Response, next: NextFunction) => {
         try {
-            res.status(201).json(await this.dutyService.addDuty(_req.body));
+            const { name } = _req.body;
+
+            res.status(201).json(await this.dutyService.addDuty(name));
         } catch (error) {
             next(error);
         }
     }
 
-    updateDuty = async(_req: Request, res: Response, next: NextFunction) => {
+    updateDuty = async(_req: Request<{id: string}>, res: Response, next: NextFunction) => {
+        const id: string  = _req.params.id;
         try {
             res.status(200).json(await this.dutyService.updateDuty(_req.params.id, _req.body));
         } catch (error) {
@@ -32,9 +35,11 @@ export class DutyController {
         }
     }
 
-    deleteDuty = async(_req: Request, res: Response, next: NextFunction) => {
+    deleteDuty = async(_req: Request<{id: string}>, res: Response, next: NextFunction) => {
         try {
-            res.status(204).json(await this.dutyService.deleteDuty(_req.body));
+            await this.dutyService.deleteDuty(_req.params.id);
+
+            res.status(204).send();
         } catch (error) {
             next(error);
         }

@@ -1,25 +1,30 @@
 import type { IDutyRepository, IDutyService } from "../interfaces/duty.interface";
-import type { Duty } from "../types/duty.types";
+import type { Duty, UpdateDutyDTO } from "../types/duty.types";
+import { randomUUID } from "node:crypto";
 
 export class DutyService implements IDutyService {
     private readonly dutyRepository: IDutyRepository;
 
     constructor(dutyRepository: IDutyRepository) { this.dutyRepository = dutyRepository }
 
-    getDuties(): Promise<Duty[]> {
-        return this.dutyRepository.getDuties();
+    async getDuties(): Promise<Duty[]> {
+        return await this.dutyRepository.getDuties();
     }
-    addDuty(data: any): Promise<Duty> {
-        return this.dutyRepository.addDuty(data);
+    async addDuty(name: string): Promise<Duty> {
+        return await this.dutyRepository.addDuty({"id": randomUUID(), name});
     }
-    updateDuty(id: string, data: any): Promise<Duty> {
-        if (!id) throw new Error("Method not implemented.");
+    async updateDuty(id: string, data: UpdateDutyDTO): Promise<Duty> {
+        if (!id) throw new Error("Missed ID url param.");
 
-        return this.dutyRepository.updateDuty(data);
+        return await this.dutyRepository.updateDuty(id, data);
     }
-    deleteDuty(id: string): Promise<boolean> {
-        if (!id) throw new Error("Method not implemented.");
+    async deleteDuty(id: string): Promise<void> {
+        if (!id) throw new Error("Missed ID url param.");
 
-        return this.dutyRepository.deleteDuty(id);
+        const result = await this.dutyRepository.deleteDuty(id);
+
+        console.log("Eliminado: ", result);
+
+        if (!result) throw new Error("Duty not found.");
     }
 }
