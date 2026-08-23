@@ -27,7 +27,6 @@ export class DutyController {
     }
 
     updateDuty = async(_req: Request<{id: string}>, res: Response, next: NextFunction) => {
-        const id: string  = _req.params.id;
         try {
             res.status(200).json(await this.dutyService.updateDuty(_req.params.id, _req.body));
         } catch (error) {
