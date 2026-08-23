@@ -1,10 +1,7 @@
 import { Router } from "express";
-import { DutyController } from "../controllers/duty.controller.ts";
-import { DutyService } from "../services/duty.service.ts";
+import { dutyController } from "../module/duty.module.ts";
 
 const router = Router();
-const dutyService = new DutyService();
-const dutyController = new DutyController(dutyService);
 
 router.get("/", dutyController.getDuties);
 router.post("/", dutyController.addDuty);
