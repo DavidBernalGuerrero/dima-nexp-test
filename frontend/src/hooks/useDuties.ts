@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import type { Duty } from "../types/duty.types"
-import { getDuties } from "../services/duty.service";
+import type { CreateDutyInput, Duty } from "../types/duty.types"
+import { createDuty, getDuties } from "../services/duty.service";
 
 interface UseDuties {
     duties: Duty[];
+    addDuty: (data: CreateDutyInput) => Promise<void>;
 }
 
 export const useDuties = (): UseDuties => {
@@ -25,5 +26,14 @@ export const useDuties = (): UseDuties => {
         return () => {};
     }, []);
 
-    return {duties};
+    const addDuty = async (data: CreateDutyInput): Promise<void> => {
+        const duty = await createDuty(data);
+
+        setDuties((current) => [
+            ...current,
+            duty,
+        ]);
+    }
+
+    return {duties, addDuty};
 }
