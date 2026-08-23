@@ -5,7 +5,7 @@ import { useDuties } from './hooks/useDuties';
 import type { CreateDutyInput } from './types/duty.types';
 
 function App() {
-  const { duties, addDuty, removeDuty } = useDuties();
+  const { duties, addDuty, editDuty, removeDuty } = useDuties();
 
   const submitHandler = async (data: CreateDutyInput) => {
     await addDuty(data);
@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <DutyForm onSubmit={submitHandler}/>
-      <DutyList duties={duties} onDelete={removeDuty}/>
+      <DutyList duties={duties} onEdit={editDuty} onDelete={removeDuty}/>
     </>
   )
 }

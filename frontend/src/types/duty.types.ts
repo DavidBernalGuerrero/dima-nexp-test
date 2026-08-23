@@ -6,3 +6,8 @@ export interface Duty {
 export interface CreateDutyInput {
     name: string;
 }
+
+export interface UpdateDutyInput {
+    id: string;
+    name: string;
+}

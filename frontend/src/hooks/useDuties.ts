@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import type { CreateDutyInput, Duty } from "../types/duty.types"
-import { createDuty, deleteDuty, getDuties } from "../services/duty.service";
+import type { CreateDutyInput, Duty, UpdateDutyInput } from "../types/duty.types"
+import { createDuty, deleteDuty, getDuties, updateDuty } from "../services/duty.service";
 
 interface UseDuties {
     duties: Duty[];
     addDuty: (data: CreateDutyInput) => Promise<void>;
+    editDuty: (id: string, data: UpdateDutyInput) => Promise<void>;
     removeDuty: (id: string) => Promise<void>;
 }
 
@@ -36,6 +37,24 @@ export const useDuties = (): UseDuties => {
         ]);
     }
 
+    const editDuty = async (
+        id: string,
+        data: UpdateDutyInput
+    ): Promise<void> => {
+        const updatedDuty = await updateDuty(
+            id,
+            data
+        );
+
+        setDuties((current) =>
+            current.map((duty) =>
+                duty.id === id
+                    ? updatedDuty
+                    : duty
+            )
+        );
+    };
+
     const removeDuty = async (id: string): Promise<void> => {
         await deleteDuty(id);
 
@@ -45,5 +64,5 @@ export const useDuties = (): UseDuties => {
             ));
     }
 
-    return {duties, addDuty, removeDuty};
+    return {duties, addDuty, editDuty, removeDuty};
 }

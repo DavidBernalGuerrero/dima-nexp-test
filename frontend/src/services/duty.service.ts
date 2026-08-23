@@ -1,4 +1,4 @@
-import type { CreateDutyInput, Duty } from "../types/duty.types";
+import type { CreateDutyInput, Duty, UpdateDutyInput } from "../types/duty.types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -26,6 +26,25 @@ export const createDuty = async (data: CreateDutyInput): Promise<Duty> => {
 
     if (!response.ok) {
         throw new Error("Unexpected error creating a new duty entry.");
+    }
+
+    return response.json();
+};
+
+export const updateDuty = async (id: string, data: UpdateDutyInput): Promise<Duty> => {
+    const response = await fetch(
+        `${API_URL}/duties/${id}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error(`Unexpected error deleting the duty ${id}.`);
     }
 
     return response.json();
