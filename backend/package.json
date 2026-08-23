@@ -5,8 +5,8 @@
   "description": "backend project of dimatica-nexplore tech test",
   "main": "index.js",
   "scripts": {
-    "start": "node server.ts",
-    "start-watch": "node --watch server.ts"
+    "start": "node src/server.ts",
+    "start-watch": "node --watch src/server.ts"
   },
   "keywords": [],
   "author": "David Bernal Guerrero",
