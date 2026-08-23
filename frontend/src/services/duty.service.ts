@@ -25,8 +25,24 @@ export const createDuty = async (data: CreateDutyInput): Promise<Duty> => {
     );
 
     if (!response.ok) {
-        throw new Error("Unexpected error getting duty list.");
+        throw new Error("Unexpected error creating a new duty entry.");
     }
 
     return response.json();
+};
+
+export const deleteDuty = async (id: string): Promise<void> => {
+    const response = await fetch(
+        `${API_URL}/duties/${id}`,
+        {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error(`Unexpected error deleting the duty ${id}.`);
+    }
 };
