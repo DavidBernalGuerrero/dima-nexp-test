@@ -12,7 +12,7 @@ const server = express();
 server.use(express.json());
 server.use(cors());
 
-server.use(base_url, dutyRouter);
+server.use(base_url + "/duties", dutyRouter);
 
 server.listen(port, () => {
     console.log(`Listening ports ${port}...`)
