@@ -1,10 +1,12 @@
 {
   "name": "backend",
+  "type": "module",
   "version": "1.0.0",
   "description": "backend project of dimatica-nexplore tech test",
   "main": "index.js",
   "scripts": {
-    "start": ""
+    "start": "node server.ts",
+    "start-watch": "node --watch server.ts"
   },
   "keywords": [],
   "author": "David Bernal Guerrero",
@@ -16,7 +18,8 @@
     "pg": "^8.23.0"
   },
   "devDependencies": {
-    "jest": "^30.4.2",
-    "nodemon": "^3.1.14"
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "jest": "^30.4.2"
   }
 }
