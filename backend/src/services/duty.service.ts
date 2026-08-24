@@ -1,6 +1,6 @@
-import type { IDutyRepository, IDutyService } from "../interfaces/duty.interface";
+import type { IDutyRepository, IDutyService } from "../interfaces/duty.interface.ts";
 import { BadRequestError, NotFoundError } from "../middlewares/error.middleware.ts";
-import type { Duty, UpdateDutyDTO } from "../types/duty.types";
+import type { Duty, UpdateDutyDTO } from "../types/duty.types.ts";
 import { randomUUID } from "node:crypto";
 
 export class DutyService implements IDutyService {

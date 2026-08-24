@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.ts",
-    "start-watch": "node --watch src/server.ts"
+    "start-watch": "node --watch src/server.ts",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
   "keywords": [],
   "author": "David Bernal Guerrero",
@@ -20,7 +22,9 @@
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
     "@types/pg": "^8.23.1",
-    "jest": "^30.4.2"
+    "jest": "^30.4.2",
+    "ts-jest": "^29.4.12"
   }
 }
